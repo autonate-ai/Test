@@ -1,1 +1,765 @@
-hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Haven - Boutique Plant Shop</title>
+    <style>
+        :root {
+            --primary-green: #4a7c59;
+            --light-green: #c9e4ca;
+            --white: #fafafa;
+            --dark-text: #333333;
+            --light-text: #666666;
+            --accent: #f0f7ed;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-green);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            margin-left: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+        
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .hero {
+            background-color: var(--light-green);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #3a6347;
+        }
+        
+        .featured {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-green);
+            font-size: 32px;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            background-color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #3a6347;
+        }
+        
+        .categories {
+            padding: 80px 0;
+            background-color: var(--accent);
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .category {
+            position: relative;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .category-img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            background-color: var(--light-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+        }
+        
+        .category-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(74, 124, 89, 0.8);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .about {
+            padding: 80px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: var(--light-green);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+        }
+        
+        .about-text h2 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+        
+        .local {
+            padding: 80px 0;
+            background-color: var(--accent);
+            text-align: center;
+        }
+        
+        .local h2 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+        
+        .local p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .map {
+            height: 400px;
+            background-color: var(--light-green);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+        }
+        
+        .testimonials {
+            padding: 80px 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: var(--light-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-size: 12px;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--light-text);
+            font-size: 14px;
+        }
+        
+        .newsletter {
+            padding: 80px 0;
+            background-color: var(--light-green);
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .newsletter-form button {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        .social-links {
+            display: flex;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin-right: 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 30px;
+                transition: left 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .about-img, .about-text {
+                flex: 100%;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 4px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#4a7c59"/>
+                        <path d="M12 6C11.45 6 11 6.45 11 7V13C11 13.55 11.45 14 12 14C12.55 14 13 13.55 13 13V7C13 6.45 12.55 6 12 6Z" fill="#4a7c59"/>
+                    </svg>
+                    <span>Green Haven</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#local">Local</a></li>
+                    <li>
+                        <a href="#cart" class="cart-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18ZM7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L21.16 5.96C21.5 5.34 21.14 4.5 20.41 4.5H5.21L4.27 2.5H1V4.5H3L6.6 11.59L5.25 14.04C4.52 15.37 5.48 17 7 17H19V15H7L7.17 14.75Z" fill="#333333"/>
+                            </svg>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="mobile-menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 18H21V16H3V18ZM3 13H21V11H3V13ZM3 6V8H21V6H3Z" fill="#333333"/>
+                    </svg>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Bring Nature Indoors</h1>
+            <p>Discover our carefully curated collection of beautiful, low-maintenance plants for your home or office in Grand Rapids.</p>
+            <a href="#shop" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="shop" class="featured">
+        <div class="container">
+            <h2 class="section-title">Featured Plants</h2>
+            <div class="products">
+                <div class="product">
+                    <div class="product-img">Plant Image Placeholder</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Monstera Deliciosa</h3>
+                        <p class="product-price">$39.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="product-img">Plant Image Placeholder</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Snake Plant</h3>
+                        <p class="product-price">$29.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="product-img">Plant Image Placeholder</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fiddle Leaf Fig</h3>
+                        <p class="product-price">$49.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="product-img">Plant Image Placeholder</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Pothos</h3>
+                        <p class="product-price">$19.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category">
+                    <div class="category-img">Category Image Placeholder</div>
+                    <div class="category-name">Indoor Plants</div>
+                </div>
+                <div class="category">
+                    <div class="category-img">Category Image Placeholder</div>
+                    <div class="category-name">Low Light Plants</div>
+                </div>
+                <div class="category">
+                    <div class="category-img">Category Image Placeholder</div>
+                    <div class="category-name">Pet-Friendly Plants</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-img">Store Image Placeholder</div>
+            <div class="about-text">
+                <h2>About Green Haven</h2>
+                <p>Green Haven is a boutique plant shop located in the heart of Grand Rapids. We specialize in carefully selected indoor plants that thrive in Michigan's climate.</p>
+                <p>Our mission is to help you bring the beauty and benefits of nature into your living and working spaces with plants that are both beautiful and easy to care for.</p>
+                <p>Each plant in our shop is hand-picked for quality and comes with care instructions to ensure it thrives in your home.</p>
+                <a href="#" class="btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="local" class="local">
+        <div class="container">
+            <h2>Proudly Serving Grand Rapids</h2>
+            <p>As a local Grand Rapids business, we're proud to serve our community with the freshest plants and personalized service. We offer local delivery throughout Grand Rapids and surrounding areas.</p>
+            <div class="map">Map Placeholder - Grand Rapids Location</div>
+            <p>Visit us in-store at 123 Plant Street, Grand Rapids, MI 49503</p>
+            <a href="#" class="btn">Get Directions</a>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "I'm new to plants and the team at Green Haven helped me find the perfect low-maintenance options for my apartment. My snake plant is thriving!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">Photo</div>
+                        <div class="author-info">
+                            <h4>Sarah K.</h4>
+                            <p>Grand Rapids</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "The local delivery option was so convenient. The plants arrived in perfect condition and the care instructions were super helpful."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">Photo</div>
+                        <div class="author-info">
+                            <h4>Mike T.</h4>
+                            <p>East Grand Rapids</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Green Haven has the best selection of indoor plants in Grand Rapids. Their staff is knowledgeable and the shop is beautiful!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">Photo</div>
+                        <div class="author-info">
+                            <h4>Jessica M.</h4>
+                            <p>Grand Rapids</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Join Our Plant Community</h2>
+            <p>Subscribe to our newsletter for plant care tips, new arrivals, and special offers for Grand Rapids residents.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Green Haven</h3>
+                    <p>Bringing nature indoors since 2020.</p>
+                    <div class="social-links">
+                        <a href="#">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 12.061C22 6.505 17.523 2 12.001 2C6.477 2 2 6.505 2 12.061C2 17.083 5.657 21.245 10.439 22V15.024H7.863V12.061H10.439V9.838C10.439 7.248 11.932 5.86 14.216 5.86C15.311 5.86 16.453 6.053 16.453 6.053V8.584H15.193C13.952 8.584 13.561 9.382 13.561 10.202V12.061H16.336L15.893 15.024H13.561V22C18.343 21.245 22 17.083 22 12.061Z" fill="white"/>
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.63 9.87 16.38 10.92 15.9 11.87C15.42 12.82 14.73 13.63 13.91 14.24C13.09 14.85 12.15 15.26 11.16 15.42C10.17 15.58 9.16 15.48 8.22 15.15C7.28 14.82 6.44 14.26 5.79 13.53C5.14 12.8 4.68 11.93 4.46 10.99C4.24 10.05 4.26 9.08 4.53 8.15C4.8 7.22 5.31 6.38 5.99 5.69C7.03 4.66 8.4 4 9.86 3.85C11.32 3.71 12.77 4.09 14 4.95C15.23 5.82 16.15 7.11 16.62 8.6C16.63 8.67 16.64 8.73 16.64 8.8Z" fill="white"/>
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2ZM16.2 4H7.8C5.7 4 4 5.7 4 7.8V16.2C4 18.3 5.7 20 7.8 20H16.2C18.3 20 20 18.3 20 16.2V7.8C20 5.7 18.3 4 16.2 4ZM12 8C14.2 8 16 9.8 16 12C16 14.2 14.2 16 12 16C9.8 16 8 14.2 8 12C8 9.8 9.8 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="white"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="#">All Plants</a></li>
+                        <li><a href="#">Indoor Plants</a></li>
+                        <li><a href="#">Low Light Plants</a></li>
+                        <li><a href="#">Pet-Friendly Plants</a></li>
+                        <li><a href="#">Planters & Pots</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Plant Care Guides</a></li>
+                        <li><a href="#">Local Delivery</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>123 Plant Street</li>
+                        <li>Grand Rapids, MI 49503</li>
+                        <li>(616) 555-1234</li>
+                        <li>hello@greenhaven.com</li>
+                        <li>Mon-Sat: 10am-6pm</li>
+                        <li>Sunday: 12pm-5pm</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Green Haven. All rights reserved.</p>
+            </div>
+        </div>
